@@ -6,7 +6,7 @@ import { ReactButton } from "./Button";
 import { EthPrice, NFTTTitle, SubInfor } from "./SubInfor";
 
 const NFTCard = ({ data }) => {
-  const navigate = useNavigation();
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -50,7 +50,7 @@ const NFTCard = ({ data }) => {
           <ReactButton
             minWidth={120}
             fontSize={SIZES.font}
-            handlePress={() => navigate("Details", { data })}
+            handlePress={() => navigation.navigate("Deatils", { data })}
           />
         </View>
       </View>
