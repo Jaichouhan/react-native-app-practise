@@ -3,6 +3,7 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import Home from "./screens/Home";
 import Deatils from "./screens/Deatils";
+import { Notifications, Permissions } from "expo";
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,20 @@ const theme = {
 };
 
 const App = () => {
+  Permissions.askAsync(Permissions.NOTIFICATIONS).then((status) => {
+    if (status === "granted") {
+      Notifications.getDevicePushTokenAsync()
+        .then((token) => {
+          Alert.alert(
+            "This is your token",
+            `${token}`,
+            [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+            { cancelable: false }
+          );
+        })
+        .catch((err) => {});
+    }
+  });
   const [loaded] = useFonts({
     InterBold: require("./assets/fonts/Inter-Bold.ttf"),
     InterSemiBold: require("./assets/fonts/Inter-SemiBold.ttf"),
